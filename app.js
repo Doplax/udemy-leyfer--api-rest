@@ -8,8 +8,12 @@ app.use(cors()) // Evita el error de CORS
 
 const PORT = process.env.PORT || 3000
 
+app.use('/',require('./routes'))
+
 app.listen(PORT, () => {
-    console.log('Tu app esta lista por http://localhost: ' + PORT);
+    console.log('Tu app esta lista por http://localhost:' + PORT);
 })
+
+
 
 dbConect()
