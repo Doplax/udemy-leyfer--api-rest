@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const TracksScheme = new mongoose.Schema(
+const TracksSchema = new mongoose.Schema(
     {
       name: {
         type: String,
@@ -46,4 +46,4 @@ const TracksScheme = new mongoose.Schema(
   );
 
 
-module.exports = mongoose.model('tracks',TracksScheme)
+module.exports = mongoose.model('tracks',TracksSchema)
