@@ -6,6 +6,7 @@ require('dotenv').config()
 
 app.use(cors()) // Evita el error de CORS
 app.use(express.json()) // Permite recibir información en JSON
+app.use(express.static("storage")) // Establece la ruta donde se encontrarán los ficheros públicos
 
 const PORT = process.env.PORT || 3000
 
