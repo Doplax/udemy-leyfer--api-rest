@@ -11,7 +11,7 @@ const {
 
 router.get("/",getItems);
 
-router.post("/",createItem);
+router.post("/", validatorCreateItem, createItem);
 
 
 module.exports = router;
