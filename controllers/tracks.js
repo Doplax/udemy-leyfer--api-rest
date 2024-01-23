@@ -1,54 +1,81 @@
-const { tracksModel } = require('../models')
+const { tracksModel } = require('../models');
+const { matchedData } = require('express-validator');
+const handleHttpError = require('../utils/handleError');
 
-
-/** 
- * 
+/**
+ * Obtener lista de items
  * @param {*} req 
  * @param {*} res 
  */
 const getItems = async (req, res) => {
-    const data = await tracksModel.find({});
-    res.send({data})
+    try {
+        const data = await tracksModel.find({});
+        res.send({ data });
+    } catch (error) {
+        handleHttpError(res, 'ERROR_GET_ITEMS');
+    }
 }
 
 /**
- * 
+ * Obtener un item
  * @param {*} req 
  * @param {*} res 
  */
-const getItem = (req, res) => {
-
+const getItem = async (req, res) => {
+    try {
+        // Asumiendo que hay algún proceso asíncrono para obtener un item
+        // const data = await algúnProcesoAsíncrono();
+        // res.send({ data });
+    } catch (error) {
+        handleHttpError(res, 'ERROR_GET_ITEM');
+    }
 }
 
-
 /**
- * 
+ * Crear un item
  * @param {*} req 
  * @param {*} res 
  */
 const createItem = async (req, res) => {
-    const { body } = req;
-    console.log(body);
-    const data = await tracksModel.create(body);
-    res.send({data})
+    try {
+        const body = matchedData(req);
+        const data = await tracksModel.create({ body });
+        res.send({ data });
+    } catch (error) {
+        handleHttpError(res, 'ERROR_CREATE_ITEMS');
+    }
 }
 
 /**
- * 
+ * Actualizar un item
  * @param {*} req 
  * @param {*} res 
  */
-const updateItem = (req, res) => {}
-
+const updateItem = async (req, res) => {
+    try {
+        // Asumiendo que hay algún proceso asíncrono para actualizar un item
+        // const body = matchedData(req);
+        // const data = await algúnProcesoAsíncrono({ body });
+        // res.send({ data });
+    } catch (error) {
+        handleHttpError(res, 'ERROR_UPDATE_ITEM');
+    }
+}
 
 /**
- * 
+ * Eliminar un item
  * @param {*} req 
  * @param {*} res 
  */
-const deleteItem = (req, res) => {}
-
-
+const deleteItem = async (req, res) => {
+    try {
+        // Asumiendo que hay algún proceso asíncrono para eliminar un item
+        // const data = await algúnProcesoAsíncrono();
+        // res.send({ data });
+    } catch (error) {
+        handleHttpError(res, 'ERROR_DELETE_ITEM');
+    }
+}
 
 module.exports = {
     getItem,
@@ -56,4 +83,4 @@ module.exports = {
     createItem,
     updateItem,
     deleteItem
-}
+};
