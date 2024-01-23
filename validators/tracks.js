@@ -44,4 +44,18 @@ const validatorCreateItem = [
 
 ];
 
-module.exports = { validatorCreateItem };
+const validatorGetItem = [
+    check('id')
+        .exists()
+        .notEmpty()
+        .isMongoId(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    } // Como es un middleware, tiene que devolver algo, en este caso el callback
+
+];
+
+module.exports = { 
+    validatorCreateItem,
+    validatorGetItem
+};

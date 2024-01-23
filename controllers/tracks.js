@@ -23,9 +23,10 @@ const getItems = async (req, res) => {
  */
 const getItem = async (req, res) => {
     try {
-        // Asumiendo que hay algún proceso asíncrono para obtener un item
-        // const data = await algúnProcesoAsíncrono();
-        // res.send({ data });
+        const req = matchedData(req);
+        const {id} = req
+        const data = await tracksModel.findById({id})
+        res.send({ data });
     } catch (error) {
         handleHttpError(res, 'ERROR_GET_ITEM');
     }
@@ -53,10 +54,9 @@ const createItem = async (req, res) => {
  */
 const updateItem = async (req, res) => {
     try {
-        // Asumiendo que hay algún proceso asíncrono para actualizar un item
-        // const body = matchedData(req);
-        // const data = await algúnProcesoAsíncrono({ body });
-        // res.send({ data });
+         const { id, ...body} = matchedData(req);
+         const data = await tracksModel.findOneAndUpdate({ id, body });
+         res.send({ data });
     } catch (error) {
         handleHttpError(res, 'ERROR_UPDATE_ITEM');
     }
@@ -69,10 +69,12 @@ const updateItem = async (req, res) => {
  */
 const deleteItem = async (req, res) => {
     try {
-        // Asumiendo que hay algún proceso asíncrono para eliminar un item
-        // const data = await algúnProcesoAsíncrono();
-        // res.send({ data });
+        const req = matchedData(req);
+        const {id} = req
+        const data = await tracksModel.deleteOne({_id:id})
+        res.send({ data });
     } catch (error) {
+        console.log(error);
         handleHttpError(res, 'ERROR_DELETE_ITEM');
     }
 }
