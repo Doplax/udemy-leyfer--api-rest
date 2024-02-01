@@ -73,9 +73,9 @@ const loginCtrl = async (req, res) => {
       return
     }
 
-    user.set('password', undefined, {strict:false})
+    user.set('password', undefined, {strict:false}) // Para no devolver la password en la respuesta
     const data = {
-      token: await tokenSign(user),
+      token: await tokenSign(user), // Devolvemos el token en vez del password
       user
     }
 
